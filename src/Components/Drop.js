@@ -1,35 +1,15 @@
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import { Formik, Field } from "formik";
-import { TextField } from "formik-material-ui";
+import { Formik } from "formik";
+import { getControl } from "./Behave";
 
 import Card from "@mui/material/Card";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 
-
-
 export default function Drop({ formData }) {
   const initialValues = formData.reduce((total, current) => {
     return { ...total, [current.id]: "" };
   }, {});
-
-  const getControl = (type, id, config) => {
-    switch (type) {
-      case "date":
-        return (
-          <Field
-            size="small"
-            variant="outlined"
-            fullWidth={true}
-            component={TextField}
-            name={id}
-            label={id}
-          />
-        );
-      default:
-        return <div>{type}</div>;
-    }
-  };
 
   return (
     <Formik initialValues={initialValues}>
@@ -38,11 +18,7 @@ export default function Drop({ formData }) {
           {(provided, snapshot) => (
             <div>
               <List
-                style={{
-                  backgroundColor: "grey",
-                  minHeight:'88vh',
-                  overflow: "auto"
-                }}
+                className="bg-gray-800 p-4 min-h-96 overflow-auto"
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
@@ -57,12 +33,8 @@ export default function Drop({ formData }) {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                       >
-                    
                         <Card
-                          style={{
-                            padding: "10px",
-                            width: "100%"
-                          }}
+                          className="p-4 w-full bg-gray-700 rounded-md shadow-md text-white"
                           {...provided.dragHandleProps}
                         >
                           {getControl(data.type, data.id)}
@@ -71,9 +43,7 @@ export default function Drop({ formData }) {
                     )}
                   </Draggable>
                 ))}
-                <ListItem>
-                 
-                </ListItem>
+                <ListItem></ListItem>
                 {provided.placeholder}
               </List>
             </div>

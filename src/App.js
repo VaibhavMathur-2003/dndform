@@ -1,10 +1,8 @@
 import { useState } from "react";
-
 import { DragDropContext } from "react-beautiful-dnd";
 import Drag from "./Components/Drag";
 import Drop from "./Components/Drop";
-import "./App.css"
-
+import "./index.css"
 function App() {
   const [formData, setFormData] = useState([]);
 
@@ -34,11 +32,11 @@ function App() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="page">
-        <div className="drag">
+      <div className="flex h-screen bg-gray-900 text-white">
+        <div className="w-1/4 p-8 overflow-auto">
           <Drag />
         </div>
-        <div className="drop">
+        <div className="w-3/4 p-8">
           <Drop formData={formData} />
         </div>
       </div>

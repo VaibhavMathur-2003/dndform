@@ -1,6 +1,4 @@
 import { Droppable, Draggable } from "react-beautiful-dnd";
-
-import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { controls } from "./Control";
@@ -13,7 +11,8 @@ function Drag() {
       isDropDisabled={true}
     >
       {(provided, snapshot) => (
-        <List
+        <div
+          className="p-4 bg-gray-800 h-5/6 overflow-auto"
           {...provided.droppableProps}
           ref={provided.innerRef}
         >
@@ -31,8 +30,9 @@ function Drag() {
                 >
                   <ListItem
                     key={control.value}
+                    className="bg-gray-700 rounded-md mb-2 p-2 cursor-pointer"
                   >
-                    <ListItemText>
+                    <ListItemText className="text-white">
                       {control.label}
                     </ListItemText>
                   </ListItem>
@@ -41,7 +41,7 @@ function Drag() {
             </Draggable>
           ))}
           {provided.placeholder}
-        </List>
+        </div>
       )}
     </Droppable>
   );
